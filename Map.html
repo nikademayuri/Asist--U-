@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Display a map on a webpage</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+	// TO MAKE THE MAP APPEAR YOU MUST
+	// ADD YOUR ACCESS TOKEN FROM
+	// https://account.mapbox.com
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZGVsdGEtc3R1ZHVlbnQiLCJhIjoiY2xvMDk0MTVhMTJ3ZDJrcGR5ZDFkaHl4ciJ9.Gj2VU1wvxc7rFVt5E4KLOQ';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        center: [73.8211, 18.6242], // starting position [lng, lat]
+        zoom: 14, // starting zoom
+        style: 'mapbox://styles/mapbox/streets-v11'
+        //mapbox://styles/mapbox/standard
+        
+    });
+
+    
+
+//     const popup = new mapboxgl.Popup({offeset:1000}).setText(
+//     'Dr. D.Y. Patil Medical College'
+// );
+
+const popup = new mapboxgl.Popup({ offset: [0, -10] })
+    .setHTML('<div><h3>Dr. D.Y. Patil Medical College</h3><img src="dy.jpeg" alt="Medical College" style= "width=100%; height=auto"></div>');
+
+    const marker=new mapboxgl.Marker({
+        color:'#FF0000',
+        scale:0.8
+        
+    })
+
+    .setLngLat([73.8211,18.6242])
+    .setPopup(popup)
+    .addTo(map);
+
+
+
+   const popup1 = new mapboxgl.Popup({ offset: [0, -10] })
+    .setHTML('<div style="text-align:center;width:auto;height:auto; font-size:12px;"><h4>Degree Mess</h4></div>');
+        const messMarkerHTML = '<img src="download.png" style="width: 25px; height: 25px;">';
+
+const messMarkerElement = document.createElement('div');
+messMarkerElement.innerHTML = messMarkerHTML;
+
+
+const messMarker = new mapboxgl.Marker(messMarkerElement)
+    .setLngLat([73.8211, 18.6231]) // Example coordinates for mess
+    .setPopup(popup1)
+    .addTo(map);
+    
+
+
+
+  
+</script>
+
+</body>
+</html>
